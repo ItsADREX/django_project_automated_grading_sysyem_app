@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Student Dashboard</h2>
+
+    <h3>Available Quizzes</h3>
+    <ul>
+        {% for quiz in available_quizzes %}
+        <div>
+            <h2>{{ quiz.name }}</h2>
+            <a href="{% url 'take_quiz' quiz.id %}">Take Quiz</a>
+        </div>
+        {% endfor %}
+        
+    </ul>
+
+    <h3>Taken Quizzes</h3>
+    <ul>
+        {% for quiz_response in taken_quizzes %}
+        <div>
+            <h3>{{ quiz_response.quiz.name }}</h3>
+            <p>Score: {{ quiz_response.total_score }}</p>
+        </div>
+        {% endfor %}
+        
+    </ul>
+{% endblock %}
+

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}My Quiz App{% endblock %}</title>
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <!-- Add the student dashboard link here -->
+        <li><a href="{% url 'student_dashboard' %}">Student Dashboard</a></li>
+        <!-- Other navigation items can go here -->
+        <li><a href="{% url 'instructor_dashboard' %}">Instructor Dashboard</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+    </ul>
+</nav>
+
+{% block content %}
+<!-- Content for individual pages will go here -->
+{% endblock %}
+
+</body>
+</html>

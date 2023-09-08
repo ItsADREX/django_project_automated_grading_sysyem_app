@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <style>
+        .quiz-container {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .question-block {
+            border: 1px solid #aaa;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .choice-block {
+            margin-bottom: 5px;
+        }
+    </style>
+    <!-- The rest of your HTML content -->
+    <h2>Take Quiz: {{ quiz.name }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="quiz-container">
+            {% for question, choices in quiz_data.items %}
+                <div class="question-block">
+                    <h3>{{ question.text }}</h3>  <!-- Display question text -->
+                    <fieldset>
+                        {% for choice in choices %}
+                            <div class="choice-block">
+                                <input type="radio" id="choice{{ choice.id }}" name="question_{{ question.id }}" value="{{ choice.id }}">
+                                <label for="choice{{ choice.id }}">{{ choice.text }}</label>  <!-- Display choice text -->
+                            </div>
+                        {% endfor %}
+                    </fieldset>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <input type="submit" value="Submit Quiz">
+    </form>
+{% endblock %}

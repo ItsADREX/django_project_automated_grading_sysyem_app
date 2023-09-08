@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Add Questions</h1>
+<form method="post" id="questionForm">
+  {% csrf_token %}
+  <div id="questionContainer">
+    <!-- Questions will go here -->
+  </div>
+  <button type="button" id="addQuestionButton">Add Question</button>
+  <input type="submit" value="Submit">
+</form>
+
+<script>
+// Function to add a new question
+function addQuestion() {
+  const questionContainer = document.getElementById('questionContainer');
+
+  const newQuestion = document.createElement('div');
+  newQuestion.innerHTML = `
+    <label>Question:</label>
+    <input type="text" name="questions[]"><br>
+    <button type="button" onclick="addChoice(this)">Add Choice</button>
+    <div class="choiceContainer">
+      <!-- Choices will go here -->
+    </div>
+  `;
+
+  questionContainer.appendChild(newQuestion);
+}
+
+// Function to add a new choice to a question
+function addChoice(buttonElement) {
+  const choiceContainer = buttonElement.nextElementSibling;
+
+  const newChoice = document.createElement('div');
+  newChoice.innerHTML = `
+    <label>Choice:</label>
+    <input type="text" name="choices[]">
+    <label>Is correct?</label>
+    <input type="checkbox" name="is_correct[]"><br>
+  `;
+
+  choiceContainer.appendChild(newChoice);
+}
+
+// Initial setup: Add one question by default
+addQuestion();
+
+// Add event listener for "Add Question" button
+document.getElementById('addQuestionButton').addEventListener('click', addQuestion);
+</script>
+{% endblock %}

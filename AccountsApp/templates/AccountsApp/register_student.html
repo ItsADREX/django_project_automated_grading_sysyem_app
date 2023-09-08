@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        
+        .form-center {
+            display:flex;
+            justify-content: center;
+            width:480px;
+            margin: 0 auto;
+            top: 50%;
+            left: 50%;
+            height:20px;
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="form-center">
+<div class="container mt-5">
+    <h1>Student Registration</h1>
+    <form method="post" class="resizable" >
+        {% csrf_token %}
+        {{ form.username.label }}: {{ form.username }}
+        {{ form.password1.label }}: {{ form.password1 }}
+        {{ form.password2.label }}: {{ form.password2 }}
+        <div class="mb-3">
+            <label class="form-label">Name:</label>
+            <input type="text" class="form-control" name="name" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Email:</label>
+            <input type="email" class="form-control" name="email" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Matric Number:</label>
+            <input type="text" class="form-control" name="matric_number" pattern="\d{9}" required>
+            <div class="form-text">Must be 9 digits</div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Password:</label>
+            <input type="password" class="form-control" id="password1" name="password1" minlength="8" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Confirm Password:</label>
+            <input type="password" class="form-control" id="password2" name="password2" minlength="8" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</div>
+</div>
+
+<!-- Add this before the closing </body> tag in both student_register.html and instructor_register.html -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('form').on('submit', function(event) {
+            var password = $('#password1').val();
+            var confirmPassword = $('#password2').val();
+            if (password !== confirmPassword) {
+                alert('Password and Confirm Password must match.');
+                event.preventDefault();
+            }
+        });
+    });
+</script>
+
+
+</body>
+</html>
+

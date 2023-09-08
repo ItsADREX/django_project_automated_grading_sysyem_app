@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Quiz Results for "{{ results.quiz_name }}"</h1>
+  <h2>Your Score: {{ results.score }}</h2>
+
+  <ul>
+    {% for question in results.questions %}
+      <li>
+        <h4>{{ question.text }}</h4>
+        <p>Your Answer: {{ request.POST.get('question_'|add:question.id) }}</p>
+        <p>Correct Answer: {{ question.choices.get(is_correct=True).text }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,17 @@
+<!-- quiz_results.html -->
+<h1>Your Score: {{ score }}</h1>
+<h2>Detailed Results:</h2>
+<ul>
+    {% for detail in details %}
+        <li>
+            <strong>Question:</strong> {{ detail.question }}<br>
+            <strong>Your Answer:</strong> {{ detail.user_answer }}<br>
+            <strong>Correct Answer:</strong> {{ detail.correct_answer }}<br>
+            <strong>Status:</strong> 
+            <span style="color: {% if detail.is_correct %}green{% else %}red{% endif %};">
+                {{ detail.is_correct|yesno:"Correct,Incorrect" }}
+            </span>
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'download_pdf' quiz_id %}" class="btn btn-primary">Download Results</a>
